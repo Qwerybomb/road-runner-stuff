@@ -1,0 +1,6 @@
+.turnTo() is in + = clockwise
+                - = counterclockwise
+.lineToY() can only make the robot go forward and backward
+.lineToX() can only make the robot go forward and backward
+Robot Coordinate Plane is in +y Left -Y right
+                             +X Up -X down
