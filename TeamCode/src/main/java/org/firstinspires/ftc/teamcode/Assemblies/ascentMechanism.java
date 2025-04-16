@@ -1,25 +1,52 @@
 package org.firstinspires.ftc.teamcode.Assemblies;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.acmerobotics.roadrunner.Action;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ascentMechanism {
 
+    Telemetry telemetry;
     static final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
     static final double MAX_POS     =  1.0;     // Maximum rotational position
     static final double MIN_POS     =  0.0;     // Minimum rotational position
 
     // Define class members
-    Servo   servo;
+    static Servo   servo;
 
     double position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
 
-    public ascentMechanism(HardwareMap hwMap) {
+    public ascentMechanism(HardwareMap hwMap, Telemetry telemetry) {
 
         // initiates servo name
         servo = hwMap.get(Servo.class, "left_hand");
+        this.telemetry = telemetry;
     }
-
+    // Function for claw90
+    public class SetPosistion implements Action {
+        int t = 0;
+        public void setRun(int m) {
+            t = m;
+        }
+@Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+    ascentMechanism.SetPosistion(t);
+    return false;
+}
+    }
+    // action for SetPosistion
+    public Action claw90(int turn) {
+        SetPosistion pos = new SetPosistion();
+        pos.setRun(turn);
+        telemetry.addData("t", pos.t);
+        telemetry.update();
+        return pos;
+    }
     public void rise(boolean rise, boolean lower) {
         if (rise) { // Makes the robot's arm rise
             // Keep stepping up until we hit the max value.
@@ -56,7 +83,7 @@ public class ascentMechanism {
         servo.setPosition(position);
     }
 
-    public void SetPosistion(double Posistion) {
+    public static void SetPosistion(double Posistion) {
         servo.setPosition(Posistion);
     }
 }
