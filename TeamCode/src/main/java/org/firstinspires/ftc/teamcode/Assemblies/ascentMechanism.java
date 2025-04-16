@@ -28,24 +28,20 @@ public class ascentMechanism {
         this.telemetry = telemetry;
     }
     // Function for claw90
-    public class SetPosistion implements Action {
-        int t = 0;
-        public void setRun(int m) {
-            t = m;
+    public class setPosistion implements Action {
+        int pos = 0;
+        public setPosistion(int p) {
+            pos = p;
         }
 @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-    ascentMechanism.SetPosistion(t);
+    ascentMechanism.SetPosistion(pos);
     return false;
 }
     }
-    // action for SetPosistion
-    public Action claw90(int turn) {
-        SetPosistion pos = new SetPosistion();
-        pos.setRun(turn);
-        telemetry.addData("t", pos.t);
-        telemetry.update();
-        return pos;
+    // action for setPosistion
+    public Action armMove(int turn) {
+        return new setPosistion(turn);
     }
     public void rise(boolean rise, boolean lower) {
         if (rise) { // Makes the robot's arm rise
