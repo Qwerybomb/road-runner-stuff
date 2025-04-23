@@ -27,18 +27,19 @@ public class ascentMechanism {
         servo = hwMap.get(Servo.class, "left_hand");
         this.telemetry = telemetry;
     }
-    // Function for claw90
+    // class for parallelism
     public class setPosistion implements Action {
         int pos = 0;
         public setPosistion(int p) {
             pos = p;
         }
-@Override
+        @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-    ascentMechanism.SetPosistion(pos);
-    return false;
-}
+            ascentMechanism.SetPosistion(pos);
+            return false;
+        }
     }
+
     // action for setPosistion
     public Action armMove(int turn) {
         return new setPosistion(turn);

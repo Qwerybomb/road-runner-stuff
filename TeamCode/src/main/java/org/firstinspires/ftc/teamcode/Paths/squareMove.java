@@ -23,13 +23,13 @@ public final class squareMove extends LinearOpMode {
                 drive.actionBuilder(beginPose)
                         .turnTo(Math.PI / 2)
                         .stopAndAdd(arm.armMove(1))
-                        .lineToY(96)
-                        .turnTo(0)
-                        .lineToX(96)
-                        .turnTo(Math.PI / -2)
-                        .lineToY(0)
-                        .turnTo(Math.PI)
-                        .lineToX(0)
+//                        .lineToY(96)
+//                        .turnTo(0)
+//                        .lineToX(96)
+//                        .turnTo(Math.PI / -2)
+//                        .lineToY(0)
+//                        .turnTo(Math.PI)
+//                        .lineToX(0)
                         .build());
         }
     }
