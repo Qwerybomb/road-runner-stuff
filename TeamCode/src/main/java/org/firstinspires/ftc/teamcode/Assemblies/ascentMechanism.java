@@ -83,4 +83,5 @@ public class ascentMechanism {
     public static void SetPosistion(double Posistion) {
         servo.setPosition(Posistion);
     }
+    public double getPosistion() { return servo.getPosition();}
 }

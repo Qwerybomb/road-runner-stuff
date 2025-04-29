@@ -5,9 +5,14 @@ import org.firstinspires.ftc.teamcode.Assemblies.ascentMechanism;
 
 @TeleOp(name = "Test", group = "Concept")
 public class operationTest extends LinearOpMode {
-ascentMechanism arm = new ascentMechanism(hardwareMap, telemetry);
+    ascentMechanism arm = new ascentMechanism(hardwareMap, telemetry);
+
     @Override
     public void runOpMode() {
-arm.armMove((int) gamepad1.left_stick_x);
+        waitForStart();
+        while (opModeIsActive()) {
+            telemetry.addData("intendedRotation", arm.getPosistion());
+            arm.armMove((int) gamepad1.left_stick_x);
+        }
     }
 }
