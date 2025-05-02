@@ -8,8 +8,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ContinuousRotationMechanism {
+    // initialize servo and telemetry
     static CRServo servo = null;
     Telemetry telemetry = null;
+    // construct the class
     public ContinuousRotationMechanism(HardwareMap hwMap, Telemetry telemetry) {
         servo = hwMap.get(CRServo.class, "left_hand");
         this.telemetry = telemetry;
@@ -21,21 +23,23 @@ public class ContinuousRotationMechanism {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        servo.setPower(0);
     }
-    public class setPosistionPobject implements Action {
-        double power = 0;
-        double timeInSeconds = 0;
-        public setPosistionPobject(double p, double t) {
-            power = p;
-            timeInSeconds = t;
-        }
-        @Override
-        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            ContinuousRotationMechanism.powerUpdate(power, timeInSeconds);
-            return false;
-        }
+    // runs the action described in the setPosistionPobject Class
+    public Action posistionUpdateAction(double power, double time) {
+        return new setPosistionPobject(power, time);
     }
-    public Action posistionUpdateAction(double posistion, double time) {
-        return new setPosistionPobject(posistion, time);
+}
+class setPosistionPobject implements Action {
+    double power = 0;
+    double timeInSeconds = 0;
+    public setPosistionPobject(double p, double t) {
+        power = p;
+        timeInSeconds = t;
+    }
+    @Override
+    public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+        ContinuousRotationMechanism.powerUpdate(power, timeInSeconds);
+        return false;
     }
 }

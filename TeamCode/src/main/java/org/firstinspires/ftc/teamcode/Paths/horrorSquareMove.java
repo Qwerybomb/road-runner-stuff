@@ -19,12 +19,11 @@ public final class horrorSquareMove extends LinearOpMode {
         Pose2d beginPose = new Pose2d(0, 0, 0);
         if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
             MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
-            ascentMechanism.SetPosistion(0);
             waitForStart();
             Actions.runBlocking(
                 drive.actionBuilder(beginPose)
                         .turnTo(Math.PI / 2)
-                        .stopAndAdd(arm.posistionUpdateAction(0.5, 1.5))
+                        .stopAndAdd(arm.posistionUpdateAction(1, 1.5))
                         .lineToY(96)
                         .turnTo(0)
 //                        .lineToX(96)
