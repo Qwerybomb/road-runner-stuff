@@ -20,6 +20,5 @@ public final class TestPath extends LinearOpMode {
         trajectoryDepot paths = new trajectoryDepot(drive, arm);
         waitForStart();
         paths.horrorSquareMove(beginPose);
-        paths.squareMove(beginPose);
     }
 }
