@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Assemblies.ContinuousRotationMechanism;
-import org.firstinspires.ftc.teamcode.Assemblies.ascentMechanism;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.tuning.TuningOpModes;
 
@@ -23,7 +22,7 @@ public final class horrorSquareMove extends LinearOpMode {
             Actions.runBlocking(
                 drive.actionBuilder(beginPose)
                         .turnTo(Math.PI / 2)
-                        .stopAndAdd(arm.posistionUpdateAction(1, 1.5))
+                        .stopAndAdd(arm.CRAction(1))
                         .lineToY(96)
                         .turnTo(0)
 //                        .lineToX(96)

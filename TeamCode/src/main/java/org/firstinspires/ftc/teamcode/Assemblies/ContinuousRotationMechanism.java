@@ -2,12 +2,15 @@ package org.firstinspires.ftc.teamcode.Assemblies;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.ParallelAction;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+enum actionType {
+    START,
+    STOP;
+}
 
 public class ContinuousRotationMechanism {
     // initialize servo and telemetry
@@ -25,26 +28,25 @@ public class ContinuousRotationMechanism {
             // do nothing type sh
         }
     }
-    public static void powerUpdate(double power, double time) {
+
+    public static void giveServoPower(double power) {
         servo.setPower(power);
-        Wait(time);
-        servo.setPower(0);
     }
     // runs the action described in the setPosistionPobject Class
-    public Action posistionUpdateAction(double power, double time) {
-        return new setPosistionPobject(power, time);
+    public Action CRAction(double power) {
+        return new setPosistionPobject(power);
     }
 }
 class setPosistionPobject implements Action {
     double power = 0;
-    double timeInSeconds = 0;
-    public setPosistionPobject(double p, double t) {
+    public setPosistionPobject(double p) {
         power = p;
-        timeInSeconds = t;
     }
+
+
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        ContinuousRotationMechanism.powerUpdate(power, timeInSeconds);
+        ContinuousRotationMechanism.giveServoPower(power);
         return false;
     }
 }
