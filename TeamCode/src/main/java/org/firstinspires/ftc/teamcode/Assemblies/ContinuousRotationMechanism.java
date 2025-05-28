@@ -7,20 +7,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-enum actionType {
-    START,
-    STOP;
-}
 
 public class ContinuousRotationMechanism {
     // initialize servo and telemetry
     static CRServo servo = null;
-    Telemetry telemetry = null;
+    static Telemetry telemetry = null;
     private static final ElapsedTime runtime = new ElapsedTime(ElapsedTime.SECOND_IN_NANO);
     // construct the class
     public ContinuousRotationMechanism(HardwareMap hwMap, Telemetry telemetry) {
         servo = hwMap.get(CRServo.class, "left_hand");
-        this.telemetry = telemetry;
+        ContinuousRotationMechanism.telemetry = telemetry;
     }
     public static void Wait(double Seconds) {
         runtime.reset();
@@ -28,9 +24,11 @@ public class ContinuousRotationMechanism {
             // do nothing type sh
         }
     }
-
+    // action for applying power to the servo
     public static void giveServoPower(double power) {
         servo.setPower(power);
+        telemetry.addData("p = ", servo.getPower());
+        telemetry.update();
     }
     // runs the action described in the setPosistionPobject Class
     public Action CRAction(double power) {
@@ -39,6 +37,8 @@ public class ContinuousRotationMechanism {
 }
 class setPosistionPobject implements Action {
     double power = 0;
+    private Telemetry telemetry;
+
     public setPosistionPobject(double p) {
         power = p;
     }

@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Assemblies;
 import com.acmerobotics.roadrunner.*;
 import com.acmerobotics.roadrunner.ftc.Actions;
-
+import com.acmerobotics.roadrunner.ParallelAction;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import java.lang.Math;
 
@@ -18,10 +18,10 @@ public class trajectoryDepot {
         drive.actionBuilder(pose)
                 .turnTo(Math.PI / 2)
                 .waitSeconds(1)
-                .afterTime(0,arm.CRAction(1))
-                .lineToY(96)
+                .afterTime(0.25,arm.CRAction(1))
+                .lineToY(12)
                 .waitSeconds(1)
-                .afterTime(0,arm.CRAction(0))
+                .afterTime(0.25,arm.CRAction(0))
                 .turnTo(0)
 //                .afterTime(0,arm.CRAction(-1, 1.5))
 //                .lineToX(96)
