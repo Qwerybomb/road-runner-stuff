@@ -1,4 +1,7 @@
 package org.firstinspires.ftc.teamcode.Assemblies;
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.*;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.acmerobotics.roadrunner.ParallelAction;
@@ -41,5 +44,18 @@ public class trajectoryDepot {
                 .lineToY(96)
                 .turnTo(0)
                 .build());
+    }
+    public void stupidTest(Pose2d pose) {
+        Action driveAction = drive.actionBuilder(pose)
+                .lineToX(36)
+                // Start servo spin at t=0
+                .afterTime(0, arm.CRAction(1.0))
+                // Stop servo spin at t=3 seconds
+                .afterTime(3, arm.CRAction(0.0))
+                .build();
+        TelemetryPacket telem = null;
+      while(driveAction.run(telem)) {
+          // please god work
+        }
     }
 }

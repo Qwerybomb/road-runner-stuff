@@ -19,6 +19,6 @@ public final class TestPath extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
         trajectoryDepot paths = new trajectoryDepot(drive, arm);
         waitForStart();
-        paths.horrorSquareMove(beginPose);
+        paths.stupidTest(beginPose);
     }
 }

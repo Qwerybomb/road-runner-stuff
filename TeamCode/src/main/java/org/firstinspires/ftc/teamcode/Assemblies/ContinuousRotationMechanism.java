@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Assemblies;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ParallelAction;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -38,6 +39,7 @@ public class ContinuousRotationMechanism {
 class setPosistionPobject implements Action {
     double power = 0;
     private Telemetry telemetry;
+    private boolean isFinished = false;
 
     public setPosistionPobject(double p) {
         power = p;
@@ -46,7 +48,10 @@ class setPosistionPobject implements Action {
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        ContinuousRotationMechanism.giveServoPower(power);
+        if (!isFinished) {
+            ContinuousRotationMechanism.giveServoPower(power);
+            isFinished = true;
+        }
         return false;
     }
 }
