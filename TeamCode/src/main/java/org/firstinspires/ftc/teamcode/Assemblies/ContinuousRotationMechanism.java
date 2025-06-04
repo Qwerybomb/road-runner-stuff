@@ -40,6 +40,7 @@ class setPosistionPobject implements Action {
     double power = 0;
     private Telemetry telemetry;
     private boolean isFinished = false;
+    ContinuousRotationMechanism cont;
 
     public setPosistionPobject(double p) {
         power = p;
@@ -48,10 +49,7 @@ class setPosistionPobject implements Action {
 
     @Override
     public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-        if (!isFinished) {
-            ContinuousRotationMechanism.giveServoPower(power);
-            isFinished = true;
-        }
+        ContinuousRotationMechanism.giveServoPower(power);
         return false;
     }
 }
