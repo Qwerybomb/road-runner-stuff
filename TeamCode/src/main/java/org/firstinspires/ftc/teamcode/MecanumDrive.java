@@ -62,13 +62,13 @@ public final class MecanumDrive {
 
         // drive model parameters
         public double inPerTick = 0.02531;
-        public double lateralInPerTick = 0.00224;
+        public double lateralInPerTick = 0.02365;
         public double trackWidthTicks = 4237.708;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.934;
-        public double kV = 0.000594;
-        public double kA = 0.00007;
+        public double kS = 0;
+        public double kV = 0;
+        public double kA = 0;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -137,6 +137,8 @@ public final class MecanumDrive {
 
             // TODO: reverse encoders if needed
             //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
             this.pose = pose;
         }
