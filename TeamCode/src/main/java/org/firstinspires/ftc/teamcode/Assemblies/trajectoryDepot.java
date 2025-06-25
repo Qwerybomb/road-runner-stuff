@@ -10,15 +10,32 @@ import java.lang.Math;
 
 public class trajectoryDepot {
     MecanumDrive drive;
-    public trajectoryDepot(MecanumDrive inputDrive) {
+    Claw claw;
+    public trajectoryDepot(MecanumDrive inputDrive, Claw inputClaw) {
         drive = inputDrive;
+        claw = inputClaw;
     }
 
     public void horrorSquareMove(Pose2d pose) {
         Actions.runBlocking(
         drive.actionBuilder(pose)
                 .turnTo(Math.PI / 2)
-                .build());
+                        .waitSeconds(1)
+                        .lineToY(96)
+                        .waitSeconds(1)
+                        .turnTo(0)
+                        .waitSeconds(1)
+                        .lineToX(96)
+                        .waitSeconds(1)
+                        .turnTo(Math.PI / -2)
+                        .waitSeconds(1)
+                        .lineToY(0)
+                        .waitSeconds(1)
+                        .turnTo(Math.PI)
+                        .waitSeconds(1)
+                        .lineToX(0)
+                        .waitSeconds(1)
+                        .build());
     }
     public void squareMove(Pose2d pose) {
         Actions.runBlocking(

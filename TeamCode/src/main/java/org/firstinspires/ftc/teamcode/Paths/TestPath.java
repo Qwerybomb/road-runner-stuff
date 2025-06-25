@@ -14,7 +14,8 @@ public final class TestPath extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(0,0,0);
         MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
-        trajectoryDepot paths = new trajectoryDepot(drive);
+        Claw claw = new Claw(hardwareMap, telemetry);
+        trajectoryDepot paths = new trajectoryDepot(drive, claw);
         waitForStart();
         paths.horrorSquareMove(beginPose);
 
